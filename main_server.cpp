@@ -55,7 +55,7 @@ int main()
 	list<Person> persList;
 	list<Person>::iterator iter;
 	persList.push_back(Person(++ID, "Ustimenko", "Denis", "8-923-244-0371"));
-	persList.push_back(Person(++ID, "Nikitina", "Irina", "8-953-872-3772"));
+	persList.push_back(Person(++ID, "Novikov", "Egor", "8-921-777-2554"));
 	//Основной цикл программы
 	while(1)
 	{
