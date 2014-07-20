@@ -1,6 +1,4 @@
 #include <iostream>
-#include <list>
-#include <algorithm>
 #include <string>
 
 #include "class_person.h"
@@ -13,14 +11,14 @@ Person::Person() : ID(0), lastName("n/a"), firstName("n/a"), phoneNumber("n/a")
 Person::Person(int id, string lname, string fname, string pnumber) : ID(id), lastName(lname), firstName(fname), phoneNumber(pnumber)
 { }
 
-void Person::display() const
+string Person::PersonInfo()
 {
-	cout << endl << lastName << "\t" << firstName << "\t\tTelephone: " << phoneNumber;
+	return (lastName + " " + firstName + " " + phoneNumber + "\n");
 }
 
-string Person::get_phone() const
-{ 
-	return phoneNumber; 
+string Person::GetLastName()
+{
+	return lastName;
 }
 
 bool operator==(Person& p1, Person& p2)

@@ -50,13 +50,18 @@ int Client::Connect()
 	else cout<<"Connection opened"<<endl;
 }
 
-int Send(Client& c, const char* message)
+int Client::Send(const char* message)
 {
-	send(c.sock, message, 100, 0);
+	send(sock, message, 100, 0);
 }
 
-int Receive(Client& c)
+int Client::Receive()
 {
-	recv(c.sock, c.bufferChar, 100, 0);
-	c.buffer = c.bufferChar;
+	recv(sock, bufferChar, 100, 0);
+	buffer = bufferChar;
+}
+
+string Client::GetBuffer()
+{
+  return buffer;
 }

@@ -1,10 +1,5 @@
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
-#include <unistd.h>
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 #include <string>
 
@@ -50,10 +45,10 @@ int main()
 	//если это quit или no- выходим из программы
 	do
 	{
-	  Receive(client);
-	  cout<<client.buffer<<endl;
+	  client.Receive();
+	  cout<<client.GetBuffer()<<endl;
 	  cin>>message;
-	  Send(client, message.c_str());
+	  client.Send(message.c_str());
 	} while((message != "quit") && (message != "no"));
 
 	return 0;

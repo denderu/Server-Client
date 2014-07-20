@@ -1,10 +1,5 @@
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
-#include <unistd.h>
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <list>
@@ -60,95 +55,95 @@ int main()
 	while(1)
 	{
 	  message = "";
-	  Send(server, "Type 'quit' to exit the program");
-	  read = Receive(server);
+	  server.Send("Type 'quit' to exit the program");
+	  read = server.Receive();
 	  //Если полученная из клиента команда add
-	  if(server.buffer == "add")
+	  if(server.GetBuffer() == "add")
 	  {
 		//Получаем с клиента поля нового объекта Person
-		Send(server, "Enter the lastname:");
-		  read = Receive(server);
-		  perslname = server.buffer;
-		Send(server, "Enter the firstname:");
-		  read = Receive(server);
-		  persfname = server.buffer;
-		Send(server, "Enter the telephone number:");
-		  read = Receive(server);
-		  perspnumber = server.buffer;
+		server.Send("Enter the lastname:");
+		  read = server.Receive();
+		  perslname = server.GetBuffer();
+		server.Send("Enter the firstname:");
+		  read = server.Receive();
+		  persfname = server.GetBuffer();
+		server.Send("Enter the telephone number:");
+		  read = server.Receive();
+		  perspnumber = server.GetBuffer();
 		  //Создаем новый объект Person и добавляем в список
 		  persList.push_back(Person(++ID, perslname, persfname, perspnumber));
-		Send(server, "Person was added. Do you want to continue? (yes/no)");
-		  read = Receive(server);
-		if(server.buffer == "no")  
+		server.Send("Person was added. Do you want to continue? (yes/no)");
+		  read = server.Receive();
+		if(server.GetBuffer() == "no")  
 		  break;
 	  }
 	  //Если полученная из клиента команда find
-	  else if(server.buffer == "find")
+	  else if(server.GetBuffer() == "find")
 	  {
 		//Запрашиваем поле lastName искомого объекта Person
-		Send(server, "Enter the lastname:");
-		read = Receive(server);
+		server.Send("Enter the lastname:");
+		read = server.Receive();
 		iter = persList.begin(); 
 		while(iter != persList.end())
 		{
 			//Если совпадение найдено, то формируем сообщение об объекте
-			if(iter->lastName == server.buffer)
+			if(iter->GetLastName() == server.GetBuffer())
 			{
-				message += iter->lastName + " " + iter->firstName + " " + iter->phoneNumber + "\n";
+				message += iter->PersonInfo();
 			}
 			iter++;
 		}
 		//Если формируемое сообщение пусто- объект не найден
 		if(message == "")
 		{	
-			Send(server, "Person was not found. Do you want to continue? (yes/no)");
-			read = Receive(server);
-			if(server.buffer == "no")  
+			server.Send("Person was not found. Do you want to continue? (yes/no)");
+			read = server.Receive();
+			if(server.GetBuffer() == "no")  
 				break;
 		}
 		//Если сообщение не пустое- выводим его (там информация о найденных объектах)
 		else
 		{
 			message += "\nDo you want to continue? (yes/no)";
-			Send(server, message.c_str());
-			read = Receive(server);
-			if(server.buffer == "no")  
+			server.Send(message.c_str());
+			read = server.Receive();
+			if(server.GetBuffer() == "no")  
 				break;
 		}
 	  }
 	  //Если полученная из клиента команда show
-	  else if(server.buffer == "show")
+	  else if(server.GetBuffer() == "show")
 	  {
 		iter = persList.begin(); 
 		//Пробегаем по списку и формируем сообщение о всех объектах
 		while(iter != persList.end())
 		{
-			message += iter->lastName + " " + iter->firstName + "\n";
+			message += iter->PersonInfo();
 			iter++;
 		}
 		message += "\nDo you want to continue? (yes/no)";
-		Send(server, message.c_str());
-		read = Receive(server);
-		if(server.buffer == "no")  
+		server.Send(message.c_str());
+		read = server.Receive();
+		if(server.GetBuffer() == "no")  
 			break;
 	  }
 	  //Если полученная из клиента команда help
-	  else if(server.buffer == "help")
+	  else if(server.GetBuffer() == "help")
 	  {
 		//Посылаем клиенту список доступных команд
-		Send(server, "List of commands:\nadd\nfind\nshow\n\nDo you want to continue? (yes/no)");
-		read = Receive(server);
-		if(server.buffer == "no")  
+		server.Send("List of commands:\nadd\nfind\nshow\n\nDo you want to continue? (yes/no)");
+		read = server.Receive();
+		if(server.GetBuffer() == "no")  
 			break;
 	  }
 	  //Если полученная из клиента команда не найдена
 	  else 
 	  {
 		//
-		message = "Command '"+server.buffer+"' not found\nDo you want to continue? (yes/no)";
-		Send(server, message.c_str());
-		read = Receive(server);
-		if(server.buffer == "no")  
+		message = "Command '"+server.GetBuffer()+"' not found\nDo you want to continue? (yes/no)";
+		server.Send(message.c_str());
+		read = server.Receive();
+		if(server.GetBuffer() == "no")  
 			break;
 	  }
 	} // Конец основного цикла

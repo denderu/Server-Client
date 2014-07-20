@@ -64,13 +64,18 @@ void Server::Start()
 	}
 }
 
-int Send(Server& s, const char* message)
+int Server::Send(const char* message)
 {
-	send(s.sock, message, 100, 0);
+	send(sock, message, 100, 0);
 }
 
-int Receive(Server& s)
+int Server::Receive()
 {
-	recv(s.sock, s.bufferChar, 1024, 0);
-	s.buffer = s.bufferChar;
+	recv(sock, bufferChar, 1024, 0);
+	buffer = bufferChar;
+}
+
+string Server::GetBuffer()
+{
+  return buffer;
 }

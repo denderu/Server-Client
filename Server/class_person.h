@@ -1,8 +1,10 @@
+#ifndef _PERSON_H_
+#define _PERSON_H_
 using namespace std;
 
 class Person
 {
-	public:
+	private:
 	string lastName;
 	string firstName;
 	string phoneNumber;
@@ -11,9 +13,10 @@ class Person
 	public:
 	Person();
 	Person(int id, string lname, string fname, string pnumber);
-	void display() const; 
-	string get_phone() const; 
+	string PersonInfo(); 
+	string GetLastName();
 	
 	friend bool operator<(Person&, Person&);
 	friend bool operator==(Person&, Person&);
 };
+#endif
