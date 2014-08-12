@@ -57,7 +57,7 @@ int Client::Send(const char* message)
 
 int Client::Receive()
 {
-	recv(sock, bufferChar, 100, 0);
+	recv(sock, bufferChar, 1024, 0);
 	buffer = bufferChar;
 }
 

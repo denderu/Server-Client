@@ -1,11 +1,10 @@
 #ifndef _SERVER_H_
 #define _SERVER_H_
-<<<<<<< HEAD
+
 
 #include <iostream>
 #include <fstream>
-=======
->>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
+
 using namespace std;
 
 class Server
@@ -15,10 +14,8 @@ class Server
 		struct sockaddr_in addr;
 		char bufferChar[1024];
 		string buffer;
-<<<<<<< HEAD
 		ofstream fileLogger;
-=======
->>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
+
 	public:
 		Server();
 		~Server();
