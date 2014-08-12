@@ -14,13 +14,20 @@ using namespace std;
 
 Server::Server()
 {
+<<<<<<< HEAD
 	cout<<"Server object created"<<endl;
+=======
+  cout<<"Server object created"<<endl;
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 Server::~Server()
 {
 	close(sock);
+<<<<<<< HEAD
 	fileLogger.close();
+=======
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 int Server::Listener(int domain, int type, int protocol)
@@ -50,8 +57,11 @@ int Server::Bind()
 		exit(2);
 	}
 	else cout<<"Binding completed"<<endl;
+<<<<<<< HEAD
 	
 	fileLogger.open("/home/denis/work/Server-Client/log.txt", ios::out);
+=======
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 void Server::Start()
@@ -65,20 +75,29 @@ void Server::Start()
 		perror("accept");
 		exit(3);
 	}
+<<<<<<< HEAD
 	fileLogger<<"Server started"<<endl;
+=======
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 int Server::Send(const char* message)
 {
 	send(sock, message, 100, 0);
+<<<<<<< HEAD
 	fileLogger<<"Server: "<<message<<endl;
+=======
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 int Server::Receive()
 {
 	recv(sock, bufferChar, 1024, 0);
 	buffer = bufferChar;
+<<<<<<< HEAD
 	fileLogger<<"Client: "<<buffer<<endl;
+=======
+>>>>>>> 5b0dff6f5d2969f4edce52b938f030b35cc0c137
 }
 
 string Server::GetBuffer()
