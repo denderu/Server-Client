@@ -1,0 +1,5 @@
+*.txt
+Server/*.o
+Server/Makefile
+Client/*.o
+Client/Makefile
